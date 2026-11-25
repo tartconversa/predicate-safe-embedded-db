@@ -1,0 +1,90 @@
+[
+  {
+    "pos": 0,
+    "kind": "begin",
+    "tx": "r",
+    "client": "reader",
+    "mode": "read"
+  },
+  {
+    "pos": 1,
+    "kind": "get",
+    "tx": "r",
+    "table": "lessons",
+    "key": "l1"
+  },
+  {
+    "pos": 2,
+    "kind": "begin",
+    "tx": "w",
+    "client": "writer",
+    "wire_id": "w1"
+  },
+  {
+    "pos": 3,
+    "kind": "put",
+    "tx": "w",
+    "table": "lessons",
+    "key": "l1",
+    "value": {
+      "slot": "1030",
+      "info": "新版"
+    }
+  },
+  {
+    "pos": 4,
+    "kind": "commit",
+    "tx": "w"
+  },
+  {
+    "pos": 5,
+    "kind": "get",
+    "tx": "r",
+    "table": "lessons",
+    "key": "l1"
+  },
+  {
+    "pos": 6,
+    "kind": "history",
+    "client": "maintainer"
+  },
+  {
+    "pos": 7,
+    "kind": "commit",
+    "tx": "r"
+  },
+  {
+    "pos": 8,
+    "kind": "history",
+    "client": "maintainer"
+  },
+  {
+    "pos": 9,
+    "kind": "begin",
+    "tx": "t",
+    "client": "writer",
+    "wire_id": "w2"
+  },
+  {
+    "pos": 10,
+    "kind": "put",
+    "tx": "t",
+    "table": "lessons",
+    "key": "l1",
+    "value": {
+      "slot": "1115",
+      "info": "未定"
+    }
+  },
+  {
+    "pos": 11,
+    "kind": "commit",
+    "tx": "t",
+    "fault": "mid_write"
+  },
+  {
+    "pos": 12,
+    "kind": "restart",
+    "component": "store"
+  }
+]

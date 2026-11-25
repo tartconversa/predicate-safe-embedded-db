@@ -1,0 +1,16 @@
+{
+  "databases": {
+    "main": {
+      "file": "main.sql",
+      "rows": {
+        "lessons": 1,
+        "assignments": 1
+      }
+    }
+  },
+  "events": 13,
+  "documents": [],
+  "settings": {
+    "history_byte_limit": 180
+  }
+}

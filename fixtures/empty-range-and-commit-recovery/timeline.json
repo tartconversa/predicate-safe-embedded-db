@@ -1,0 +1,169 @@
+[
+  {
+    "pos": 1,
+    "kind": "begin",
+    "tx": "slow",
+    "client": "reader",
+    "mode": "read"
+  },
+  {
+    "pos": 2,
+    "kind": "begin",
+    "tx": "one",
+    "client": "a",
+    "wire_id": "ra"
+  },
+  {
+    "pos": 3,
+    "kind": "begin",
+    "tx": "two",
+    "client": "b",
+    "wire_id": "rb"
+  },
+  {
+    "pos": 4,
+    "kind": "range",
+    "tx": "one",
+    "table": "assignments",
+    "field": "slot",
+    "lo": "0900",
+    "hi": "1000"
+  },
+  {
+    "pos": 5,
+    "kind": "range",
+    "tx": "two",
+    "table": "assignments",
+    "field": "slot",
+    "lo": "0900",
+    "hi": "1000"
+  },
+  {
+    "pos": 6,
+    "kind": "savepoint",
+    "tx": "two",
+    "save": "branch"
+  },
+  {
+    "pos": 7,
+    "kind": "put",
+    "tx": "two",
+    "table": "assignments",
+    "key": "scratch",
+    "value": {
+      "slot": "0920",
+      "instructor": "i"
+    }
+  },
+  {
+    "pos": 8,
+    "kind": "rollback_to",
+    "tx": "two",
+    "save": "branch"
+  },
+  {
+    "pos": 9,
+    "kind": "put",
+    "tx": "one",
+    "table": "lessons",
+    "key": "l101",
+    "value": {
+      "slot": "0920",
+      "info": "烙铁"
+    }
+  },
+  {
+    "pos": 10,
+    "kind": "put",
+    "tx": "one",
+    "table": "assignments",
+    "key": "a101",
+    "value": {
+      "slot": "0920",
+      "instructor": "i"
+    }
+  },
+  {
+    "pos": 11,
+    "kind": "put",
+    "tx": "two",
+    "table": "lessons",
+    "key": "l201",
+    "value": {
+      "slot": "0920",
+      "info": "机床"
+    }
+  },
+  {
+    "pos": 12,
+    "kind": "put",
+    "tx": "two",
+    "table": "assignments",
+    "key": "a201",
+    "value": {
+      "slot": "0920",
+      "instructor": "i"
+    }
+  },
+  {
+    "pos": 13,
+    "kind": "commit",
+    "tx": "one"
+  },
+  {
+    "pos": 14,
+    "kind": "commit",
+    "tx": "two"
+  },
+  {
+    "pos": 15,
+    "kind": "begin",
+    "tx": "three",
+    "client": "c",
+    "wire_id": "rc"
+  },
+  {
+    "pos": 16,
+    "kind": "put",
+    "tx": "three",
+    "table": "assignments",
+    "key": "a301",
+    "value": {
+      "slot": "1200",
+      "instructor": "j"
+    }
+  },
+  {
+    "pos": 17,
+    "kind": "put",
+    "tx": "three",
+    "table": "lessons",
+    "key": "l301",
+    "value": {
+      "slot": "1200",
+      "info": "实作"
+    }
+  },
+  {
+    "pos": 18,
+    "kind": "commit",
+    "tx": "three",
+    "fault": "durable_before_reply"
+  },
+  {
+    "pos": 19,
+    "kind": "restart",
+    "component": "store"
+  },
+  {
+    "pos": 20,
+    "kind": "retry",
+    "client": "c",
+    "wire_id": "rc"
+  },
+  {
+    "pos": 21,
+    "kind": "history",
+    "client": "maintainer"
+  }
+]
